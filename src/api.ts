@@ -21,10 +21,12 @@ export const getCardsApi = () =>
   fetch(urlWithoutVPN)
     .then((res) => checkResponse<TUserResponse>(res))
     .then((data) => {
-      return data.results.map((card: TUser, index: number) => ({
-        id: `card-${index}`,
+      return data.results.map((card: TUser) => ({
+        id: crypto.randomUUID(),
         imageUrl: card.picture.large,
         title: `${card.name.first} ${card.name.last}`,
         description: `Город: ${card.location.city}`,
+        isLiked: false,
+        isCustom: false,
       }));
     });

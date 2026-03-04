@@ -3,6 +3,8 @@ export type TCard = {
   title: string;
   imageUrl: string;
   description: string;
+  isLiked: boolean;
+  isCustom?: boolean;
 };
 
 export type TUser = {

@@ -33,6 +33,10 @@ export const cardsSlice = createSlice({
         (card) => card.id !== action.payload.id,
       );
     },
+    toggleLikeCard(state, action: PayloadAction<TCard>) {
+      const card = state.cardsList.find((card) => card.id == action.payload.id);
+      if (card) card.isLiked = !card.isLiked;
+    },
   },
   selectors: {
     getCards: (state) => state.cardsList,
@@ -57,6 +61,7 @@ export const cardsSlice = createSlice({
 });
 
 export const { getCards, getIsCardsLoading } = cardsSlice.selectors;
+export const { addCard, deleteCard, toggleLikeCard } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
 
