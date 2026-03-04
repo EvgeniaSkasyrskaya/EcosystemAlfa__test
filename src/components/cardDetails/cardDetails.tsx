@@ -4,7 +4,7 @@ import styles from './cardDetails.module.css';
 import { Heart, Edit, XSquare } from 'react-feather';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../../slices/store';
-import { toggleLikeCard } from '../../slices/cardsSlice';
+import { toggleLikeCard, setCardToEdit } from '../../slices/cardsSlice';
 import { useNavigate } from 'react-router-dom';
 
 type CardDetailsUIProps = {
@@ -24,6 +24,8 @@ export const CardDetailsUI: FC<CardDetailsUIProps> = ({ card, className }) => {
   const handleEdit = (event: React.MouseEvent) => {
     event.stopPropagation();
     event.preventDefault();
+    dispatch(setCardToEdit(card));
+    navigate(`/edit/${card.id}`);
   };
 
   return (

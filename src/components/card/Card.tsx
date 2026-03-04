@@ -4,7 +4,12 @@ import styles from './Card.module.css';
 import { Heart, Edit, Trash2 } from 'react-feather';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../../slices/store';
-import { deleteCard, toggleLikeCard } from '../../slices/cardsSlice';
+import {
+  deleteCard,
+  toggleLikeCard,
+  setCardToEdit,
+} from '../../slices/cardsSlice';
+import { useNavigate } from 'react-router-dom';
 
 type CardUIProps = {
   card: TCard;
@@ -13,6 +18,7 @@ type CardUIProps = {
 
 export const CardUI: FC<CardUIProps> = ({ card, className }) => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const handleDelete = (event: React.MouseEvent) => {
     event.stopPropagation();
     event.preventDefault();
@@ -26,6 +32,8 @@ export const CardUI: FC<CardUIProps> = ({ card, className }) => {
   const handleEdit = (event: React.MouseEvent) => {
     event.stopPropagation();
     event.preventDefault();
+    dispatch(setCardToEdit(card));
+    navigate(`/edit/${card.id}`);
   };
 
   return (
