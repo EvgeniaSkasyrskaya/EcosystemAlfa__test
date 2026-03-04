@@ -1,0 +1,87 @@
+.card__container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 370px;
+  max-height: 370px;
+  width: 280px;
+  border-radius: 10px;
+  font-family: sans-serif;
+  overflow: hidden;
+  background-color: #eee;
+}
+
+.card__image {
+  width: 100%;
+  height: 70%;
+  min-height: 259px;
+  top: 0;
+  left: 0;
+  height: 282px;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.card__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+}
+
+.card__button_delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.card__button_delete:hover {
+  opacity: 1;
+}
+
+.card__icon {
+  width: 70%;
+  height: 70%;
+}
+
+.card__wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.card__textInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.card__title {
+  font-size: 18px;
+}
+
+.card__icons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-self: center;
+  align-self: flex-end;
+}
+
+.card__text {
+  display: -webkit-box;
+  font-size: 14px;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
