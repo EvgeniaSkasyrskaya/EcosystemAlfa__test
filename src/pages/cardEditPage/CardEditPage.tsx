@@ -2,12 +2,12 @@ import type { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Loader } from '../../components/loader';
-import { CardDetailsUI } from '../../components/cardDetails';
 import { getCards } from '../../slices/cardsSlice';
-import styles from './CardDetailsPage.module.css';
+import styles from './CardEditPage.module.css';
 import type { TCard } from './../../types';
+import { CardFormUI } from '../../components/form';
 
-export const CardDetailsPage: FC = () => {
+export const CardEditPage: FC = () => {
   const cardId = String(useParams().id);
   const cardData =
     useSelector(getCards).find((card: TCard) => card.id === cardId) ?? null;
@@ -16,7 +16,7 @@ export const CardDetailsPage: FC = () => {
   }
   return (
     <div className={styles.page__container}>
-      <CardDetailsUI key={cardData.id} card={cardData} />
+      <CardFormUI key={cardData.id} card={cardData} />
     </div>
   );
 };
