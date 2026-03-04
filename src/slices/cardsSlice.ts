@@ -66,17 +66,6 @@ export const cardsSlice = createSlice({
     setSearchQuery: (state, action: PayloadAction<string>) => {
       state.searchQuery = action.payload;
     },
-    // setSearchResults: (state, action: PayloadAction<string>) => {
-    //   state.cardsList.filter((card) =>
-    //     card.title
-    //       .trim()
-    //       .toLowerCase()
-    //       .includes(action.payload.toLowerCase()) === true,
-    //   );
-    // },
-    // clearSearchQuery: (state) => {
-    //   state.searchQuery = '';
-    // },
   },
   selectors: {
     getCards: (state) => state.cardsList,
@@ -84,7 +73,6 @@ export const cardsSlice = createSlice({
     getFilterMode: (state) => state.filterMode,
     getCardToEdit: (state) => state.cardToEdit,
     getSearchQuery: (state) => state.searchQuery,
-    // getSearchResults: (state) => state.searchResults,
   },
   extraReducers: (builder) => {
     builder
@@ -110,7 +98,6 @@ export const {
   getFilterMode,
   getCardToEdit,
   getSearchQuery,
-  // getSearchResults,
 } = cardsSlice.selectors;
 export const {
   addCard,
@@ -120,7 +107,6 @@ export const {
   setCardToEdit,
   updateCard,
   setSearchQuery,
-  // clearSearchQuery,
 } = cardsSlice.actions;
 
 export const selectVisibleCards = createSelector(
