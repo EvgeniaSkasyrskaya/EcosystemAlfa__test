@@ -3,6 +3,8 @@
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 
+const API_KEY = import.meta.env.VITE_PEXELS_API_KEY;
+
 const urlPexelsWithVPN =
   'https://api.pexels.com/v1/search?query=nature&per_page=15';
 
@@ -38,7 +40,11 @@ export type TPhotoResponse = {
 };
 
 export const getCardsApi = () =>
-  fetch(urlPexelsWithVPN)
+  fetch(urlPexelsWithVPN, {
+    headers: {
+      Authorization: API_KEY,
+    },
+  })
     .then((res) => checkResponse<TPhotoResponse>(res))
     .then((data) => {
       return data.photos.map((card: TPhoto) => ({
