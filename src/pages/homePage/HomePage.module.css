@@ -1,0 +1,15 @@
+.main {
+  width: 100%;
+}
+
+.content {
+  padding: 20px;
+  background-color: lightgrey;
+}
+
+.title {
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-align: center;
+}

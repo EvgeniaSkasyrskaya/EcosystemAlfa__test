@@ -1,0 +1,21 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #f2f2f3;
+  font-family: sans-serif;
+}
+
+/* .app__header {
+  height: 50px;
+  width: 100%;
+  background-color: grey;
+}
+
+.app__footer {
+  height: 50px;
+  width: 100%;
+  background-color: lightpink;
+} */
