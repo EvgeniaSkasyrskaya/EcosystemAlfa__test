@@ -17,12 +17,14 @@ export interface CardsState {
   cardsList: TCard[];
   isCardsLoading: boolean;
   filterMode: TFilterMode;
+  cardToEdit: TCard | null;
 }
 
 export const initialState: CardsState = {
   cardsList: [],
   isCardsLoading: true,
   filterMode: 'all',
+  cardToEdit: null,
 };
 
 export const cardsSlice = createSlice({
@@ -45,11 +47,24 @@ export const cardsSlice = createSlice({
     setFilterMode(state, action: PayloadAction<TFilterMode>) {
       state.filterMode = action.payload;
     },
+    setCardToEdit(state, action: PayloadAction<TCard | null>) {
+      state.cardToEdit = action.payload;
+    },
+    updateCard(state, action: PayloadAction<TCard>) {
+      const indexCardToEdit = state.cardsList.findIndex(
+        (card) => card.id === action.payload.id,
+      );
+      if (indexCardToEdit !== -1) {
+        state.cardsList[indexCardToEdit] = action.payload;
+      }
+      state.cardToEdit = null;
+    },
   },
   selectors: {
     getCards: (state) => state.cardsList,
     getIsCardsLoading: (state) => state.isCardsLoading,
     getFilterMode: (state) => state.filterMode,
+    getCardToEdit: (state) => state.cardToEdit,
   },
   extraReducers: (builder) => {
     builder
@@ -69,10 +84,16 @@ export const cardsSlice = createSlice({
   },
 });
 
-export const { getCards, getIsCardsLoading, getFilterMode } =
+export const { getCards, getIsCardsLoading, getFilterMode, getCardToEdit } =
   cardsSlice.selectors;
-export const { addCard, deleteCard, toggleLikeCard, setFilterMode } =
-  cardsSlice.actions;
+export const {
+  addCard,
+  deleteCard,
+  toggleLikeCard,
+  setFilterMode,
+  setCardToEdit,
+  updateCard,
+} = cardsSlice.actions;
 
 export const selectVisibleCards = createSelector(
   [getCards, getFilterMode],
