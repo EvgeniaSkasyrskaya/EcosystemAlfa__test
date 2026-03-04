@@ -15,13 +15,18 @@ export const CardUI: FC<CardUIProps> = ({ card, className }) => {
   const dispatch: AppDispatch = useDispatch();
   const handleDelete = (event: React.MouseEvent) => {
     event.stopPropagation();
+    event.preventDefault();
     dispatch(deleteCard(card));
   };
   const handleLike = (event: React.MouseEvent) => {
     event.stopPropagation();
+    event.preventDefault();
     dispatch(toggleLikeCard(card));
   };
-  const handleEdit = () => {};
+  const handleEdit = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    event.preventDefault();
+  };
 
   return (
     <article
