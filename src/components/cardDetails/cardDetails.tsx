@@ -59,6 +59,7 @@ export const CardDetailsUI: FC<CardDetailsUIProps> = ({ card, className }) => {
           className={styles.cardDetails__button}
           onClick={onClose}
         >
+          {/* <p>Назад</p> */}
           <XSquare className={styles.cardDetails__icon} />
         </button>
       </div>

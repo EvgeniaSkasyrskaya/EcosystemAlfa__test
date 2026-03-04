@@ -53,7 +53,7 @@
   flex-direction: row;
   gap: 15px;
   justify-content: space-between;
-  padding: 10px;
+  padding: 12px;
 }
 
 .card__textInfo {
@@ -64,7 +64,13 @@
 }
 
 .card__title {
+  display: -webkit-box;
   font-size: 18px;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
 }
 
 .card__icons {

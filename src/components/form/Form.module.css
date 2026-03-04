@@ -1,8 +1,83 @@
 .cardForm__container {
+  padding: 30px;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  padding: 20px;
-  height: 800px;
+  margin-top: calc((100vh - 800px) / 3);
+  height: 950px;
   width: 800px;
+  font-family: sans-serif;
+  overflow: hidden;
+  background-color: #bfd1c7;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardForm__inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+  padding: 10px;
+  width: 100%;
+}
+
+.cardForm__input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+
+.cardForm__input_label {
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.cardForm__input_title,
+.cardForm__input_description,
+.cardForm__input_imageUrl {
+  font-size: 18px;
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  border: solid 1px grey;
+  border-radius: 10px;
+  height: 40px;
+  padding: 10px;
+}
+
+.cardForm__image {
+  width: 100%;
+  min-width: 500px;
+  height: 500px;
+  object-fit: cover;
+  border: 1px solid grey;
+}
+
+.cardForm__buttonsWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.cardForm__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 150px;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 2px solid grey;
+  margin-top: 30px;
+}
+
+.cardForm__button:hover {
+  background-color: grey;
+  color: white;
 }

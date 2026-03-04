@@ -24,7 +24,7 @@ ol {
 }
 
 body {
-  height: 2500px;
+  height: min-content;
   margin: 0 auto;
   max-width: 1200px;
   overflow: scroll;

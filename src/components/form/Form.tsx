@@ -28,7 +28,11 @@ export const CardFormUI: React.FC<CardFormUIProps> = () => {
         }
       : { title: '', imageUrl: '', description: '' },
   );
-  const [errors, setErrors] = useState({ title: '', imageUrl: '' });
+  const [errors, setErrors] = useState({
+    title: '',
+    imageUrl: '',
+    description: '',
+  });
 
   // useEffect(() => {
   //   if (cardToEdit) {
@@ -41,13 +45,16 @@ export const CardFormUI: React.FC<CardFormUIProps> = () => {
   // }, [cardToEdit]);
 
   const validate = () => {
-    const newErrors = { title: '', imageUrl: '' };
-    if (values.title.length < 3) newErrors.title = 'Минимум 3 символа';
+    const newErrors = { title: '', imageUrl: '', description: '' };
+    if (values.title.length < 3)
+      newErrors.title = 'Минимум 3 символа для имени автора';
+    if (values.description.length < 3)
+      newErrors.description = 'Минимум 3 символа для описания изображения';
     if (!values.imageUrl.startsWith('http'))
-      newErrors.imageUrl = 'Нужна ссылка на фото';
+      newErrors.imageUrl = 'Нужна ссылка на фото, начинающаяся с http';
 
     setErrors(newErrors);
-    return !newErrors.title && !newErrors.imageUrl;
+    return !newErrors.title && !newErrors.imageUrl && !newErrors.description;
   };
 
   const handleSubmit = (event: SyntheticEvent) => {
@@ -66,7 +73,6 @@ export const CardFormUI: React.FC<CardFormUIProps> = () => {
         }),
       );
     }
-    // navigate(-1);
     handleReset();
   };
 
@@ -83,36 +89,67 @@ export const CardFormUI: React.FC<CardFormUIProps> = () => {
       noValidate
     >
       <div className={styles.cardForm__inputsWrapper}>
-        <input
-          className={styles.cardForm__input_title}
-          value={values.title}
-          onChange={(e) => setValues({ ...values, title: e.target.value })}
-          placeholder="Название"
-        />
-        {errors.title && (
-          <span className={styles.cardForm__error} style={{ color: 'red' }}>
-            {errors.title}
-          </span>
-        )}
+        <label className={styles.cardForm__input}>
+          <span className={styles.cardForm__input_label}>Имя автора:</span>
+          <input
+            className={styles.cardForm__input_title}
+            value={values.title}
+            onChange={(e) => setValues({ ...values, title: e.target.value })}
+            placeholder="Имя автора"
+            name="title"
+            required
+          />
+          {errors.title && <span style={{ color: 'red' }}>{errors.title}</span>}
+        </label>
 
-        <input
-          className={styles.cardForm__input_imageUrl}
-          value={values.imageUrl}
-          onChange={(e) => setValues({ ...values, imageUrl: e.target.value })}
-          placeholder="Ссылка на картинку"
-        />
-        {errors.imageUrl && (
-          <span className={styles.cardForm__error} style={{ color: 'red' }}>
-            {errors.imageUrl}
+        <label className={styles.cardForm__input}>
+          <span className={styles.cardForm__input_label}>
+            Описание изображения:
           </span>
-        )}
+          <input
+            className={styles.cardForm__input_description}
+            value={values.description}
+            onChange={(e) =>
+              setValues({ ...values, description: e.target.value })
+            }
+            placeholder="Описание"
+            name="description"
+            required
+          />
+          {errors.description && (
+            <span style={{ color: 'red' }}>{errors.description}</span>
+          )}
+        </label>
+
+        <label className={styles.cardForm__input}>
+          <span className={styles.cardForm__input_label}>
+            Ссылка на изображение:
+          </span>
+          <input
+            className={styles.cardForm__input_imageUrl}
+            value={values.imageUrl}
+            onChange={(e) => setValues({ ...values, imageUrl: e.target.value })}
+            placeholder="Ссылка на изображение"
+            name="imageUrl"
+            required
+          />
+          {errors.imageUrl && (
+            <span style={{ color: 'red' }}>{errors.imageUrl}</span>
+          )}
+        </label>
 
         <img className={styles.cardForm__image} src={values.imageUrl} />
       </div>
       <div className={styles.cardForm__buttonsWrapper}>
-        <button type="submit">{cardToEdit ? 'Сохранить' : 'Создать'}</button>
+        <button className={styles.cardForm__button} type="submit">
+          {cardToEdit ? 'Сохранить' : 'Создать'}
+        </button>
         {cardToEdit && (
-          <button type="button" onClick={handleReset}>
+          <button
+            className={styles.cardForm__button}
+            type="button"
+            onClick={handleReset}
+          >
             Отмена
           </button>
         )}

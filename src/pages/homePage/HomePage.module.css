@@ -1,8 +1,10 @@
 .main {
-  width: 100%;
+  width: min-content;
+  display: flex;
 }
 
 .content {
+  width: min-content;
   padding: 20px;
   background-color: lightgrey;
 }
