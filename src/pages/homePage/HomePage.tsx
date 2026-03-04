@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { getCards, getIsCardsLoading } from '../../slices/cardsSlice';
+import { selectVisibleCards, getIsCardsLoading } from '../../slices/cardsSlice';
 import styles from './HomePage.module.css';
 import { Loader } from '../../components/loader';
 import { GalleryUI } from '../../components/gallery/Gallery';
@@ -8,7 +8,7 @@ import type { TCard } from '../../types';
 
 export const HomePage: FC = () => {
   const isCardsLoading = useSelector(getIsCardsLoading);
-  const cards: TCard[] = useSelector(getCards);
+  const cards: TCard[] = useSelector(selectVisibleCards);
   return (
     <>
       {isCardsLoading ? (
