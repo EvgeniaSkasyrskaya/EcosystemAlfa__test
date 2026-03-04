@@ -35,13 +35,29 @@
   width: 30px;
 }
 
+/* .cardDetails__buttonWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 100px;
+  border: 1px
+} */
+
+.cardDetails__buttonText {
+  font-size: 16px;
+  vertical-align: middle;
+}
+
 .cardDetails__button_delete:hover {
-  background-color: #999;
+  background-color: hsl(0, 0%, 60%);
 }
 
 .cardDetails__icon {
-  width: 100%;
-  height: 100%;
+  width: 30px;
+  height: 30px;
 }
 
 .cardDetails__image {

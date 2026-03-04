@@ -5,8 +5,8 @@ import styles from './App.module.css';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../../slices/store';
 import { Routes, Route } from 'react-router-dom';
-import { Heart } from 'react-feather';
 import { HomePage } from '../../pages/homePage';
+import { ProductsGalleryPage } from '../../pages/productsGalleryPage';
 import { CardDetailsPage } from '../../pages/cardDetailsPage';
 import { CardEditPage } from '../../pages/cardEditPage';
 import { CreateProductPage } from '../../pages/createProductPage';
@@ -22,8 +22,8 @@ export const App = () => {
     <div className={styles.app}>
       <header className={styles.app__header}></header>
       <Routes>
-        <Route path="/" element={<Heart />} />
-        <Route path="/products" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<ProductsGalleryPage />} />
         <Route path="/products/:id" element={<CardDetailsPage />} />
         <Route path="/edit/:id" element={<CardEditPage />} />
         <Route path="/create-product" element={<CreateProductPage />} />
