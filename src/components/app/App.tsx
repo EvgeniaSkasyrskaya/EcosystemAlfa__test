@@ -7,6 +7,7 @@ import type { AppDispatch } from '../../slices/store';
 import { Routes, Route } from 'react-router-dom';
 import { Heart } from 'react-feather';
 import { HomePage } from '../../pages/homePage';
+import { CardDetailsPage } from '../../pages/cardDetailsPage';
 
 export const App = () => {
   // const navigate = useNavigate();
@@ -22,9 +23,9 @@ export const App = () => {
     <div className={styles.app}>
       <header className={styles.app__header}></header>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<Heart />} />
-        <Route path="/products/:id" element={<Heart />} />
+        <Route path="/" element={<Heart />} />
+        <Route path="/products" element={<HomePage />} />
+        <Route path="/products/:id" element={<CardDetailsPage />} />
         <Route path="/create-product" element={<Heart />} />
         <Route path="/favourites" element={<Heart />} />
         <Route path="*" element={<h1>404: Страница не найдена</h1>} />
