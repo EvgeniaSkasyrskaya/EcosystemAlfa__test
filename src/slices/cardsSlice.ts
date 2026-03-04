@@ -18,6 +18,8 @@ export interface CardsState {
   isCardsLoading: boolean;
   filterMode: TFilterMode;
   cardToEdit: TCard | null;
+  searchQuery: string | undefined;
+  searchResults: TCard[];
 }
 
 export const initialState: CardsState = {
@@ -25,6 +27,8 @@ export const initialState: CardsState = {
   isCardsLoading: true,
   filterMode: 'all',
   cardToEdit: null,
+  searchQuery: undefined,
+  searchResults: [],
 };
 
 export const cardsSlice = createSlice({
@@ -59,12 +63,28 @@ export const cardsSlice = createSlice({
       }
       state.cardToEdit = null;
     },
+    setSearchQuery: (state, action: PayloadAction<string>) => {
+      state.searchQuery = action.payload;
+    },
+    // setSearchResults: (state, action: PayloadAction<string>) => {
+    //   state.cardsList.filter((card) =>
+    //     card.title
+    //       .trim()
+    //       .toLowerCase()
+    //       .includes(action.payload.toLowerCase()) === true,
+    //   );
+    // },
+    // clearSearchQuery: (state) => {
+    //   state.searchQuery = '';
+    // },
   },
   selectors: {
     getCards: (state) => state.cardsList,
     getIsCardsLoading: (state) => state.isCardsLoading,
     getFilterMode: (state) => state.filterMode,
     getCardToEdit: (state) => state.cardToEdit,
+    getSearchQuery: (state) => state.searchQuery,
+    // getSearchResults: (state) => state.searchResults,
   },
   extraReducers: (builder) => {
     builder
@@ -84,8 +104,14 @@ export const cardsSlice = createSlice({
   },
 });
 
-export const { getCards, getIsCardsLoading, getFilterMode, getCardToEdit } =
-  cardsSlice.selectors;
+export const {
+  getCards,
+  getIsCardsLoading,
+  getFilterMode,
+  getCardToEdit,
+  getSearchQuery,
+  // getSearchResults,
+} = cardsSlice.selectors;
 export const {
   addCard,
   deleteCard,
@@ -93,6 +119,8 @@ export const {
   setFilterMode,
   setCardToEdit,
   updateCard,
+  setSearchQuery,
+  // clearSearchQuery,
 } = cardsSlice.actions;
 
 export const selectVisibleCards = createSelector(
