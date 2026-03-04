@@ -1,5 +1,6 @@
 import {
   createSlice,
+  createSelector,
   createAsyncThunk,
   type PayloadAction,
 } from '@reduxjs/toolkit';
@@ -10,14 +11,18 @@ export const fetchCards = createAsyncThunk('cards/fetchCards', async () =>
   getCardsApi(),
 );
 
+export type TFilterMode = 'all' | 'liked' | 'custom';
+
 export interface CardsState {
   cardsList: TCard[];
   isCardsLoading: boolean;
+  filterMode: TFilterMode;
 }
 
 export const initialState: CardsState = {
   cardsList: [],
   isCardsLoading: true,
+  filterMode: 'all',
 };
 
 export const cardsSlice = createSlice({
@@ -37,10 +42,14 @@ export const cardsSlice = createSlice({
       const card = state.cardsList.find((card) => card.id == action.payload.id);
       if (card) card.isLiked = !card.isLiked;
     },
+    setFilterMode(state, action: PayloadAction<TFilterMode>) {
+      state.filterMode = action.payload;
+    },
   },
   selectors: {
     getCards: (state) => state.cardsList,
     getIsCardsLoading: (state) => state.isCardsLoading,
+    getFilterMode: (state) => state.filterMode,
   },
   extraReducers: (builder) => {
     builder
@@ -60,52 +69,23 @@ export const cardsSlice = createSlice({
   },
 });
 
-export const { getCards, getIsCardsLoading } = cardsSlice.selectors;
-export const { addCard, deleteCard, toggleLikeCard } = cardsSlice.actions;
+export const { getCards, getIsCardsLoading, getFilterMode } =
+  cardsSlice.selectors;
+export const { addCard, deleteCard, toggleLikeCard, setFilterMode } =
+  cardsSlice.actions;
+
+export const selectVisibleCards = createSelector(
+  [getCards, getFilterMode],
+  (cards, mode) => {
+    switch (mode) {
+      case 'liked':
+        return cards.filter((card: TCard) => card.isLiked);
+      case 'custom':
+        return cards.filter((card: TCard) => card.isCustom);
+      default:
+        return cards;
+    }
+  },
+);
 
 export default cardsSlice.reducer;
-
-// export const fetchDogs = createAsyncThunk('dogs/fetchDogs', async () => {
-//   const response = await fetch('https://api.thedogapi.com');
-//   const data = await response.json();
-//   return data.map(dog => ({
-//     id: dog.id,
-//     url: dog.url,
-//     name: dog.breeds[0]?.name || 'Случайная собака',
-//     info: dog.breeds[0]?.temperament || 'Очень дружелюбный пес',
-//     isCustom: false // пометка, что это данные из API
-//   }));
-// });
-
-// const dogsSlice = createSlice({
-//   name: 'dogs',
-//   initialState: {
-//     items: [],
-//     status: 'idle',
-//   },
-//   reducers: {
-//     // Редюсер для добавления карточки пользователем
-//     addDog: (state, action) => {
-//       state.items.unshift({
-//         ...action.payload,
-//         id: Date.now(),
-//         isCustom: true // пометка для пользовательской карточки
-//       });
-//     },
-//     // Редюсер для удаления
-//     removeDog: (state, action) => {
-//       state.items = state.items.filter(dog => dog.id !== action.payload);
-//     }
-//   },
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(fetchDogs.pending, (state) => { state.status = 'loading'; })
-//       .addCase(fetchDogs.fulfilled, (state, action) => {
-//         state.status = 'idle';
-//         state.items = [...state.items, ...action.payload];
-//       });
-//   },
-// });
-
-// export const { addDog, removeDog } = dogsSlice.actions;
-// export default dogsSlice.reducer;

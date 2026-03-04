@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import type { TCard } from '../../types';
 import styles from './Gallery.module.css';
 import { CardUI } from '../card';
+import { FilterDropdown } from '../filterDropdown';
 import { Link } from 'react-router-dom';
 
 type GalleryUIProps = {
@@ -20,6 +21,7 @@ export const GalleryUI: FC<GalleryUIProps> = ({ className, title, items }) => {
       }
     >
       {title && <h2 className={styles.gallery__title}>{title}</h2>}
+      <FilterDropdown />
       <ul className={styles.gallery__list}>
         {items.map((item) => (
           <li key={item.id}>
